@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Data: not ours to redistribute, and it contains slurs and hate speech
+data/raw/
+data/processed/
+
+# Model weights (large); predictions and run configs ARE versioned
+runs/*/model.pt
+runs/*/model.joblib
+runs/*/model/
+runs/*_smoke/

@@ -1,0 +1,20 @@
+{
+  "name": "char_bigru",
+  "family": "char",
+  "arch": "bigru",
+  "max_chars": 128,
+  "emb_dim": 64,
+  "hidden": 128,
+  "layers": 1,
+  "dropout": 0.3,
+  "loss": "ce",
+  "class_weight_power": 0.5,
+  "focal_gamma": 2.0,
+  "batch_size": 128,
+  "lr": 0.002,
+  "weight_decay": 0.01,
+  "epochs": 20,
+  "patience": 4,
+  "warmup_frac": 0.05,
+  "grad_clip": 1.0
+}
