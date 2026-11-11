@@ -1,0 +1,14 @@
+{
+  "name": "majority",
+  "family": "baseline",
+  "type": "multiclass",
+  "seed": null,
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-11T20:51:56+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "name": "char_bigru",
+  "family": "char",
+  "arch": "bigru",
+  "max_chars": 128,
+  "emb_dim": 64,
+  "hidden": 128,
+  "layers": 1,
+  "dropout": 0.3,
+  "loss": "ce",
+  "class_weight_power": 0.5,
+  "focal_gamma": 2.0,
+  "batch_size": 128,
+  "lr": 0.002,
+  "weight_decay": 0.01,
+  "epochs": 20,
+  "patience": 4,
+  "warmup_frac": 0.05,
+  "grad_clip": 1.0,
+  "seed": 2027,
+  "amp_mode": "auto",
+  "run_name": "char_bigru_s2027",
+  "type": "multiclass",
+  "n_params": 173894,
+  "train_seconds": 185.3,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.5901539622868347,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.1095758764536627,
+      "val_macro_f1": 0.326453746990091,
+      "seconds": 16.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8268690829013806,
+      "val_macro_f1": 0.4913685939538506,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.70391656636634,
+      "val_macro_f1": 0.4518374532699607,
+      "seconds": 15.6
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6276663967180541,
+      "val_macro_f1": 0.5290463071803001,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5601684849787925,
+      "val_macro_f1": 0.557950843122456,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.49851446426148693,
+      "val_macro_f1": 0.5218623352988127,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.44860253387269045,
+      "val_macro_f1": 0.540964300214117,
+      "seconds": 14.7
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.4024744609838624,
+      "val_macro_f1": 0.5901539622868347,
+      "seconds": 14.7
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.35898907873858016,
+      "val_macro_f1": 0.514322196865465,
+      "seconds": 14.9
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.330076924352959,
+      "val_macro_f1": 0.5810174150245725,
+      "seconds": 14.5
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.2976559338121985,
+      "val_macro_f1": 0.5505737381164596,
+      "seconds": 14.7
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.2681869605657633,
+      "val_macro_f1": 0.5729374868733544,
+      "seconds": 14.7
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-11T21:35:57+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

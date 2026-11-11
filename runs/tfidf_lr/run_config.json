@@ -1,0 +1,38 @@
+{
+  "name": "tfidf_lr",
+  "family": "baseline",
+  "type": "multiclass",
+  "seed": 0,
+  "C": 16.0,
+  "search": [
+    {
+      "C": 1.0,
+      "val_macro_f1": 0.5490183422501541,
+      "seconds": 8.2
+    },
+    {
+      "C": 4.0,
+      "val_macro_f1": 0.5787823028553416,
+      "seconds": 8.9
+    },
+    {
+      "C": 16.0,
+      "val_macro_f1": 0.583584737291164,
+      "seconds": 12.5
+    },
+    {
+      "C": 64.0,
+      "val_macro_f1": 0.5521027757620519,
+      "seconds": 14.9
+    }
+  ],
+  "best_val_macro_f1": 0.583584737291164,
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-11T20:52:51+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

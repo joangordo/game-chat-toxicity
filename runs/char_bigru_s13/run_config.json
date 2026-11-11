@@ -1,0 +1,99 @@
+{
+  "name": "char_bigru",
+  "family": "char",
+  "arch": "bigru",
+  "max_chars": 128,
+  "emb_dim": 64,
+  "hidden": 128,
+  "layers": 1,
+  "dropout": 0.3,
+  "loss": "ce",
+  "class_weight_power": 0.5,
+  "focal_gamma": 2.0,
+  "batch_size": 128,
+  "lr": 0.002,
+  "weight_decay": 0.01,
+  "epochs": 20,
+  "patience": 4,
+  "warmup_frac": 0.05,
+  "grad_clip": 1.0,
+  "seed": 13,
+  "amp_mode": "auto",
+  "run_name": "char_bigru_s13",
+  "type": "multiclass",
+  "n_params": 173894,
+  "train_seconds": 155.6,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.5886126596016762,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.124291044162437,
+      "val_macro_f1": 0.30574269907339974,
+      "seconds": 16.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8201827111114667,
+      "val_macro_f1": 0.37774095977143046,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7070811181381547,
+      "val_macro_f1": 0.45724633374147694,
+      "seconds": 14.8
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6220727415512626,
+      "val_macro_f1": 0.5467957317773197,
+      "seconds": 14.9
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5601483986817768,
+      "val_macro_f1": 0.5561680852092517,
+      "seconds": 15.1
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.4997859365622251,
+      "val_macro_f1": 0.5886126596016762,
+      "seconds": 14.7
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.45124744154637236,
+      "val_macro_f1": 0.5181430986793715,
+      "seconds": 14.7
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.4037622744476149,
+      "val_macro_f1": 0.5750911812504581,
+      "seconds": 14.6
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.3557863824652067,
+      "val_macro_f1": 0.5792062263120626,
+      "seconds": 15.1
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.3229490215218809,
+      "val_macro_f1": 0.5739471480684398,
+      "seconds": 14.8
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-11T21:30:33+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

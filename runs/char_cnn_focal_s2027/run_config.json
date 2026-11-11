@@ -1,0 +1,163 @@
+{
+  "name": "char_cnn",
+  "family": "char",
+  "arch": "cnn",
+  "max_chars": 128,
+  "emb_dim": 64,
+  "n_filters": 128,
+  "kernel_sizes": [
+    3,
+    4,
+    5
+  ],
+  "dropout": 0.3,
+  "loss": "focal",
+  "class_weight_power": 0.5,
+  "focal_gamma": 2.0,
+  "batch_size": 128,
+  "lr": 0.002,
+  "weight_decay": 0.01,
+  "epochs": 20,
+  "patience": 4,
+  "warmup_frac": 0.05,
+  "grad_clip": 1.0,
+  "seed": 2027,
+  "amp_mode": "auto",
+  "run_name": "char_cnn_focal_s2027",
+  "type": "multiclass",
+  "n_params": 122822,
+  "train_seconds": 98.8,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.6210274631722856,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.07742500252997957,
+      "val_macro_f1": 0.4558225840154289,
+      "seconds": 5.5
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.05439983367616932,
+      "val_macro_f1": 0.4381430624749818,
+      "seconds": 4.4
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.04359075384312381,
+      "val_macro_f1": 0.4201644684322407,
+      "seconds": 4.6
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.034326213455150384,
+      "val_macro_f1": 0.4837197820731581,
+      "seconds": 4.7
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.029592881898904466,
+      "val_macro_f1": 0.48642676666227946,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.026640152280148245,
+      "val_macro_f1": 0.5245010184833353,
+      "seconds": 5.1
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.02416904748795373,
+      "val_macro_f1": 0.5364333455681686,
+      "seconds": 4.7
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.022146600690264064,
+      "val_macro_f1": 0.5730685886394299,
+      "seconds": 4.5
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.020795034235811395,
+      "val_macro_f1": 0.46417141846245263,
+      "seconds": 4.7
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.01961421431528413,
+      "val_macro_f1": 0.5772956664707467,
+      "seconds": 4.8
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.018172550191773048,
+      "val_macro_f1": 0.556742864452699,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.01721512039082692,
+      "val_macro_f1": 0.5618533559921631,
+      "seconds": 5.0
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.015861219415469467,
+      "val_macro_f1": 0.5931534661223479,
+      "seconds": 4.8
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.015110317877286523,
+      "val_macro_f1": 0.567647230122356,
+      "seconds": 4.7
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.014384587151706136,
+      "val_macro_f1": 0.6004943185057355,
+      "seconds": 4.6
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.013573169457595477,
+      "val_macro_f1": 0.6127885802451014,
+      "seconds": 4.5
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.01291314135307643,
+      "val_macro_f1": 0.6210274631722856,
+      "seconds": 4.5
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.011923997090258476,
+      "val_macro_f1": 0.6007817337362958,
+      "seconds": 4.6
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.011505929775405637,
+      "val_macro_f1": 0.5986687763225756,
+      "seconds": 4.4
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.011355366307266773,
+      "val_macro_f1": 0.6021754280715498,
+      "seconds": 4.4
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-11T21:40:17+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}
