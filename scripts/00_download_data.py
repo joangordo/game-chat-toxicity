@@ -60,13 +60,18 @@ def download_gametox() -> None:
             if "folders" in url:
                 gdown.download_folder(url, output=str(out), quiet=True)
             else:
-                path = gdown.download(url, output=str(out) + "/", quiet=True, fuzzy=True)
-                if path and path.endswith(".zip"):
-                    with zipfile.ZipFile(path) as z:
+                file_id = url.split("/d/")[1].split("/")[0]
+                dest = out / f"gametox_{split}_download"
+                gdown.download(id=file_id, output=str(dest), quiet=True)
+                if dest.exists() and zipfile.is_zipfile(dest):
+                    with zipfile.ZipFile(dest) as z:
                         z.extractall(out)
+                    dest.unlink()
+                elif dest.exists():
+                    dest.rename(out / f"{split}_download.csv")
             print(f"  GameTox {split}: downloaded")
-        except Exception as e:  # Google Drive often rate-limits automatic downloads
-            print(f"  GameTox {split}: automatic download failed ({type(e).__name__}).")
+        except Exception as e:  # Google Drive often blocks automatic downloads
+            print(f"  GameTox {split}: automatic download failed ({type(e).__name__}: {e}).")
 
 
 def main() -> None:
@@ -80,7 +85,7 @@ def main() -> None:
         print("Download them by hand from the Google Drive links in the shared-task repository")
         print("(https://github.com/therealthapa/eeuca-toxicity) and place the CSV files anywhere")
         print(f"inside {config.RAW_GAMETOX}. Subfolders are fine.")
-        print("If the test labels are not available, the project still runs: test metrics are skipped.")
+        print("The test files are required: the audit and the evaluation use them.")
     else:
         print("\nAll data present.")
 
