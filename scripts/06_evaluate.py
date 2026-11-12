@@ -47,6 +47,9 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--include-smoke", action="store_true")
     ap.add_argument("--n-boot", type=int, default=config.N_BOOT)
+    ap.add_argument("--detail-run", default=None,
+                    help="Run for the per-class/language/calibration/policy section "
+                         "(default: best on validation)")
     args = ap.parse_args()
     config.FIGURES.mkdir(parents=True, exist_ok=True)
 
@@ -101,6 +104,9 @@ def main() -> None:
     # --- Selected run per model (best validation), paired tests ----------------------------
     selected = mc.loc[mc.groupby("model")["val_macro_f1"].idxmax()].sort_values("val_macro_f1", ascending=False)
     best_run = selected.iloc[0]["run"]
+    detail_run = args.detail_run or best_run
+    if detail_run not in cache:
+        sys.exit(f"STOP: --detail-run {detail_run} not found among runs.")
     paired = []
     ref = "tfidf_lr" if "tfidf_lr" in cache else None
     pairs = [(a, ref) for a in selected["run"] if ref and a != ref]
@@ -112,7 +118,7 @@ def main() -> None:
     paired = pd.DataFrame(paired)
 
     # --- Best model: per class, per language, calibration, moderation policy --------------
-    mv, mt = cache[best_run]
+    mv, mt = cache[detail_run]
     pc = pd.DataFrame({"class": [config.LABELS[k] for k in config.LABELS],
                        "test_support": np.bincount(y_test, minlength=config.NUM_LABELS),
                        "f1": per_class_f1(y_test, mt["pred"])})
@@ -181,7 +187,7 @@ def main() -> None:
     ax.plot([0, 1], [0, 1], "k--", lw=0.8)
     ax.set_xlabel("Predicted confidence")
     ax.set_ylabel("Observed accuracy")
-    ax.set_title(f"Calibration: {best_run}")
+    ax.set_title(f"Calibration: {detail_run}")
     ax.legend(frameon=False)
     fig.tight_layout()
     fig.savefig(config.FIGURES / "06_calibration.png", dpi=150)
@@ -210,7 +216,8 @@ def main() -> None:
              "## Binary toxic vs non-toxic (all runs, including the generic model)", "",
              res.groupby("model")[["bin_auroc", "bin_f1", "bin_precision", "bin_recall"]].mean()
              .sort_values("bin_auroc", ascending=False).to_markdown(floatfmt=".3f"), "",
-             f"## Best model on validation: `{best_run}`", "",
+             f"## Detailed analysis: `{detail_run}`"
+             + (" (best on validation)" if detail_run == best_run else f" (best on validation: `{best_run}`)"), "",
              "### Per class", "", pc.to_markdown(index=False, floatfmt=".3f"), "",
              "Classes with a handful of test examples make macro-F1 very noisy: one message more or "
              "less correct moves the score by several points.", "",
@@ -226,7 +233,7 @@ def main() -> None:
              policy.to_markdown(index=False, floatfmt=".3f") if len(policy) else
              "_95% precision is not reachable on validation for this model._", ""]
     (config.RESULTS / "eval_report.md").write_text("\n".join(lines), encoding="utf-8")
-    save_json(config.RESULTS / "eval_summary.json", {"best_run": best_run, **calib})
+    save_json(config.RESULTS / "eval_summary.json", {"best_run": best_run, "detail_run": detail_run, **calib})
 
     pd.set_option("display.width", 180)
     print(selected[["model", "run", "val_macro_f1", "test_macro_f1", "test_ci_low", "test_ci_high",

@@ -14,7 +14,10 @@ def collect_runs(include_smoke: bool = False) -> list[dict]:
         cfg = load_json(d / "run_config.json")
         if not include_smoke and d.name.endswith("_smoke"):
             continue
-        runs.append({"dir": d, "run": d.name, "model": cfg.get("name", d.name),
+        base = cfg.get("name", d.name)
+        loss = cfg.get("loss")
+        model = f"{base}_{loss}" if loss and loss != "ce" else base
+        runs.append({"dir": d, "run": d.name, "model": model,
                      "family": cfg.get("family", "?"), "type": cfg.get("type", "multiclass"),
                      "seed": cfg.get("seed"), "loss": cfg.get("loss"), "cfg": cfg})
     return runs

@@ -1,0 +1,87 @@
+{
+  "name": "xlmr_base_w075",
+  "family": "transformer",
+  "hf_model": "FacebookAI/xlm-roberta-base",
+  "max_tokens": 64,
+  "loss": "ce",
+  "class_weight_power": 0.75,
+  "focal_gamma": 2.0,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "lr": 2e-05,
+  "weight_decay": 0.01,
+  "epochs": 10,
+  "patience": 3,
+  "warmup_frac": 0.1,
+  "grad_clip": 1.0,
+  "eval_batch_size": 128,
+  "seed": 42,
+  "amp_mode": "auto",
+  "run_name": "xlmr_base_w075_s42",
+  "type": "multiclass",
+  "n_params": 278048262,
+  "train_seconds": 1517.1,
+  "predict_seconds": 18.8,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.6260496770561662,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2472129651056565,
+      "val_macro_f1": 0.31960666788896513,
+      "seconds": 189.5
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8618644443442167,
+      "val_macro_f1": 0.4198767924327899,
+      "seconds": 190.6
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7178750965647914,
+      "val_macro_f1": 0.4797132992203001,
+      "seconds": 188.4
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.5917268449507761,
+      "val_macro_f1": 0.6072107008362567,
+      "seconds": 188.7
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5011410614213158,
+      "val_macro_f1": 0.6260496770561662,
+      "seconds": 191.5
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.40851898492527267,
+      "val_macro_f1": 0.6047120755730682,
+      "seconds": 188.5
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.3549731586758648,
+      "val_macro_f1": 0.5891913962006555,
+      "seconds": 188.6
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.297018866110538,
+      "val_macro_f1": 0.5894304913736349,
+      "seconds": 189.2
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "peak_gpu_memory_gb": 5.31,
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-12T08:25:06+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

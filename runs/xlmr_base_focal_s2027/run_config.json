@@ -1,0 +1,75 @@
+{
+  "name": "xlmr_base",
+  "family": "transformer",
+  "hf_model": "FacebookAI/xlm-roberta-base",
+  "max_tokens": 64,
+  "loss": "focal",
+  "class_weight_power": 0.5,
+  "focal_gamma": 2.0,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "lr": 2e-05,
+  "weight_decay": 0.01,
+  "epochs": 6,
+  "patience": 2,
+  "warmup_frac": 0.1,
+  "grad_clip": 1.0,
+  "eval_batch_size": 128,
+  "seed": 2027,
+  "amp_mode": "auto",
+  "run_name": "xlmr_base_focal_s2027",
+  "type": "multiclass",
+  "n_params": 278048262,
+  "train_seconds": 1153.9,
+  "predict_seconds": 18.9,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.5955114521031273,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.06828984139906122,
+      "val_macro_f1": 0.42111971768917494,
+      "seconds": 192.9
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.04435463491717444,
+      "val_macro_f1": 0.46013569481166705,
+      "seconds": 191.3
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.03225886793512744,
+      "val_macro_f1": 0.578016583196363,
+      "seconds": 191.8
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.024277439918052972,
+      "val_macro_f1": 0.5697605766565133,
+      "seconds": 192.3
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.018113529334344836,
+      "val_macro_f1": 0.5955114521031273,
+      "seconds": 191.9
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.014090806140474782,
+      "val_macro_f1": 0.5874685133439699,
+      "seconds": 191.7
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "peak_gpu_memory_gb": 5.32,
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-12T02:12:14+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

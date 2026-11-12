@@ -1,0 +1,99 @@
+{
+  "name": "xlmr_base_w075",
+  "family": "transformer",
+  "hf_model": "FacebookAI/xlm-roberta-base",
+  "max_tokens": 64,
+  "loss": "ce",
+  "class_weight_power": 0.75,
+  "focal_gamma": 2.0,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "lr": 2e-05,
+  "weight_decay": 0.01,
+  "epochs": 10,
+  "patience": 3,
+  "warmup_frac": 0.1,
+  "grad_clip": 1.0,
+  "eval_batch_size": 128,
+  "seed": 2027,
+  "amp_mode": "auto",
+  "run_name": "xlmr_base_w075_s2027",
+  "type": "multiclass",
+  "n_params": 278048262,
+  "train_seconds": 1908.2,
+  "predict_seconds": 18.8,
+  "n_train": 42959,
+  "best_val_macro_f1": 0.5997104636328416,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2338284558875148,
+      "val_macro_f1": 0.3898230460622775,
+      "seconds": 191.1
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8732626282585566,
+      "val_macro_f1": 0.4108278292523441,
+      "seconds": 190.5
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7034763490439999,
+      "val_macro_f1": 0.48101962325717373,
+      "seconds": 188.8
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6123845417978389,
+      "val_macro_f1": 0.4939242395745927,
+      "seconds": 189.5
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5187966360382401,
+      "val_macro_f1": 0.4589326609800877,
+      "seconds": 190.8
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.4373472757300517,
+      "val_macro_f1": 0.5036675344171812,
+      "seconds": 191.3
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.3601216135752562,
+      "val_macro_f1": 0.5976427264249932,
+      "seconds": 191.1
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.31092026991325983,
+      "val_macro_f1": 0.5997104636328416,
+      "seconds": 190.8
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.26698203485398997,
+      "val_macro_f1": 0.5677474460308133,
+      "seconds": 190.6
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.22882325295855352,
+      "val_macro_f1": 0.5749225448043558,
+      "seconds": 190.5
+    }
+  ],
+  "amp": "torch.bfloat16",
+  "peak_gpu_memory_gb": 5.32,
+  "env": {
+    "python": "3.12.16",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "timestamp_utc": "2026-11-12T01:12:33+00:00",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  }
+}

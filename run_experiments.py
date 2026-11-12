@@ -26,8 +26,8 @@ from src import config  # noqa: E402
 GENERIC_MODELS = ["unitary/toxic-bert", "unitary/multilingual-toxic-xlm-roberta"]
 CHAR_PLAN = [("configs/char_cnn.json", "ce"), ("configs/char_bigru.json", "ce"),
              ("configs/char_cnn.json", "focal")]
-TRANSFORMER_PLAN = [("configs/xlmr_base.json", "ce"), ("configs/mdeberta_base.json", "ce"),
-                    ("configs/xlmr_base.json", "focal")]
+TRANSFORMER_PLAN = [("configs/xlmr_base.json", "ce"), ("configs/xlmr_base_w075.json", "ce"),
+                    ("configs/xlmr_base.json", "focal"), ("configs/mdeberta_base.json", "ce")]
 
 
 def run(cmd: list[str]) -> None:

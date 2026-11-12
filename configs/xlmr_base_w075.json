@@ -1,0 +1,18 @@
+{
+  "name": "xlmr_base_w075",
+  "family": "transformer",
+  "hf_model": "FacebookAI/xlm-roberta-base",
+  "max_tokens": 64,
+  "loss": "ce",
+  "class_weight_power": 0.75,
+  "focal_gamma": 2.0,
+  "batch_size": 32,
+  "grad_accum": 1,
+  "lr": 2e-5,
+  "weight_decay": 0.01,
+  "epochs": 10,
+  "patience": 3,
+  "warmup_frac": 0.1,
+  "grad_clip": 1.0,
+  "eval_batch_size": 128
+}

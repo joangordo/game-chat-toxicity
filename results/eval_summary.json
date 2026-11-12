@@ -1,0 +1,7 @@
+{
+  "best_run": "xlmr_base_focal_s13",
+  "detail_run": "xlmr_base_focal_s13",
+  "temperature": 0.7910773719426691,
+  "ece_before": 0.06505222937672636,
+  "ece_after": 0.03444161320841589
+}
