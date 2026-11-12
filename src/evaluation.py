@@ -12,7 +12,7 @@ def collect_runs(include_smoke: bool = False) -> list[dict]:
     runs = []
     for d in list_runs():
         cfg = load_json(d / "run_config.json")
-        if not include_smoke and d.name.endswith("_smoke"):
+        if d.name.endswith("_export") or (not include_smoke and d.name.endswith("_smoke")):
             continue
         base = cfg.get("name", d.name)
         loss = cfg.get("loss")
