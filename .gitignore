@@ -12,3 +12,8 @@ runs/*/model.pt
 runs/*/model.joblib
 runs/*/model/
 runs/*_smoke/
+runs/*_export/
+# Unmasked error examples: for local reading only
+results/error_samples_UNMASKED.csv
+# Local copy of the demo model
+demo/model/

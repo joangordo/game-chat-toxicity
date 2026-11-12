@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src import config
 
 CONDA_URL = "https://raw.githubusercontent.com/usydnlp/CONDA/main/data/CONDA_{}.csv"
+LEXICON_URL = "https://raw.githubusercontent.com/usydnlp/CONDA/main/resources/lexicon_refined_1209.csv"
 GAMETOX_DRIVE = {
     "train": "https://drive.google.com/drive/folders/1HkfwexOpX1S9gRrMeCFMfZJjsBs0hQRu",
     "val": "https://drive.google.com/drive/folders/1AfQuH7_ixt3qwj3cXbt7Db4prcXZJcAB",
@@ -36,6 +37,10 @@ def download_conda() -> None:
             continue
         urllib.request.urlretrieve(CONDA_URL.format(name), dest)
         print(f"  CONDA {name}: downloaded")
+    lex = config.RAW_CONDA / "lexicon.csv"
+    if not lex.exists():
+        urllib.request.urlretrieve(LEXICON_URL, lex)
+        print("  CONDA toxicity lexicon: downloaded (used to mask examples)")
 
 
 def gametox_status() -> list[str]:

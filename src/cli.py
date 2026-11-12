@@ -16,7 +16,9 @@ def parse_train_args(description: str) -> tuple[dict, argparse.Namespace]:
     ap.add_argument("--grad-accum", type=int, default=None, help="Override the config")
     ap.add_argument("--epochs", type=int, default=None, help="Override the config")
     ap.add_argument("--limit", type=int, default=None, help="Use only N training messages (smoke test)")
-    ap.add_argument("--save-model", action="store_true", help="Keep the trained weights")
+    ap.add_argument("--save-model", action="store_true",
+                    help="Keep the weights (for the demo). Saved as a separate '_export' run "
+                         "that is excluded from the evaluation")
     args = ap.parse_args()
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
     for key in ("loss", "batch_size", "grad_accum", "epochs"):
@@ -26,5 +28,6 @@ def parse_train_args(description: str) -> tuple[dict, argparse.Namespace]:
     cfg["seed"] = args.seed
     cfg["amp_mode"] = args.amp
     suffix = f"_{cfg['loss']}" if cfg["loss"] != "ce" else ""
-    cfg["run_name"] = f"{cfg['name']}{suffix}_s{args.seed}" + ("_smoke" if args.limit else "")
+    cfg["run_name"] = (f"{cfg['name']}{suffix}_s{args.seed}" + ("_smoke" if args.limit else "")
+                       + ("_export" if args.save_model else ""))
     return cfg, args
