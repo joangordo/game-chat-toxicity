@@ -10,6 +10,8 @@ evaluation focuses on uncertainty: bootstrap confidence intervals, seed variabil
 model comparisons, calibration and a moderation policy. The models are then applied,
 without retraining, to Dota 2 chat ([CONDA](data/README.md)).
 
+**Fine-tuned model on Hugging Face:** [joangordo/game-chat-toxicity-xlmr](https://huggingface.co/joangordo/game-chat-toxicity-xlmr)
+
 > **Content warning:** the data contain insults and hate speech. Examples are masked.
 
 ## Key findings
@@ -62,7 +64,7 @@ without retraining, to Dota 2 chat ([CONDA](data/README.md)).
 | Generic toxic-bert / multilingual XLM-R | off-the-shelf | 110M / 278M | none (binary output only) |
 | Character CNN | PyTorch, from scratch | 123k | own loop, early stopping, 3 seeds |
 | Character BiGRU | PyTorch, from scratch | 174k | own loop, early stopping, 3 seeds |
-| XLM-RoBERTa base | fine-tuned | 278M | own loop, bf16, 3 seeds |
+| XLM-RoBERTa base ([on Hugging Face](https://huggingface.co/joangordo/game-chat-toxicity-xlmr)) | fine-tuned | 278M | own loop, bf16, 3 seeds |
 
 Losses: cross-entropy with class weights (inverse frequency to the power 0.5 or 0.75) or focal loss.
 All selection (epoch, hyperparameters, best run) uses validation only.
@@ -165,6 +167,20 @@ training or thresholds. CIs resample whole matches.
 Each run stores its configuration, environment, training history and predictions in `runs/<name>/`.
 The full report is [`results/REPORT.md`](results/REPORT.md).
 Hardware: NVIDIA RTX 5060 Laptop GPU (8 GB), bf16 mixed precision; about 25 minutes per XLM-R run.
+
+### Use the published model
+
+The best XLM-R run is on Hugging Face, so it can be used without retraining:
+
+```python
+from transformers import pipeline
+
+clf = pipeline("text-classification", model="joangordo/game-chat-toxicity-xlmr")
+clf("gg wp everyone")
+```
+
+The model card has the calibration temperature and moderation thresholds (`demo_config.json`).
+Its predictions need human review: see [Limitations](#limitations).
 
 ## Repository structure
 
