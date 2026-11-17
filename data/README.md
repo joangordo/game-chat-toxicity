@@ -10,6 +10,10 @@ About 53,000 World of Tanks chat messages labelled into six classes
 4 Threats, 5 Extremism). Released by the organisers of the EEUCA 2026 shared task;
 download links: https://github.com/therealthapa/eeuca-toxicity
 
+Terms: the organisers release GameTox for research purposes only, and the source
+repository has no explicit licence. It is used here for research and is not
+redistributed.
+
 Expected files (anywhere under `data/raw/gametox/`, subfolders are fine):
 `train_index_text.csv`, `train_index_label.csv`, `val_index_text.csv`,
 `val_index_label.csv`, `test_index_text.csv`, `test_index_label.csv`.
@@ -23,6 +27,9 @@ Communities. NAACL 2025 (Short Papers), 440-447.
 About 45,000 Dota 2 chat messages; the labelled train and validation files are used.
 Utterance intents E (explicit) and I (implicit) are mapped to toxic, A and O to non-toxic.
 Source: https://github.com/usydnlp/CONDA
+
+Terms: no explicit licence in the source repository; used here for research only and
+not redistributed.
 
 Weld, H., Huang, G., Lee, J., et al. (2021). CONDA: a CONtextual Dual-Annotated dataset
 for in-game toxicity understanding and detection. Findings of ACL-IJCNLP 2021, 2406-2416.

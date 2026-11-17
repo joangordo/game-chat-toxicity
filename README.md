@@ -204,4 +204,5 @@ Neither dataset is redistributed here; see [`data/README.md`](data/README.md).
 
 ## License
 
-Code: MIT. The datasets keep their original licences and terms of use.
+Code: MIT. GameTox is released for research purposes only and CONDA has no explicit licence:
+neither is redistributed here, and the fine-tuned model on Hugging Face is for research use only.
