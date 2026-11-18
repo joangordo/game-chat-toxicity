@@ -12,7 +12,13 @@ evaluation focuses on uncertainty: bootstrap confidence intervals, seed variabil
 model comparisons, calibration and a moderation policy. The models are then applied,
 without retraining, to Dota 2 chat ([CONDA](data/README.md)).
 
-**Fine-tuned model on Hugging Face:** [joangordo/game-chat-toxicity-xlmr](https://huggingface.co/joangordo/game-chat-toxicity-xlmr)
+**Fine-tuned model on Hugging Face:** [joangordo/game-chat-toxicity-xlmr](https://huggingface.co/joangordo/game-chat-toxicity-xlmr) ·
+[![Try the demo in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joangordo/game-chat-toxicity/blob/main/demo/demo_colab.ipynb)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="results/figures/readme_transfer_dark.png">
+  <img src="results/figures/readme_transfer_light.png" alt="Slope chart of binary AUROC on World of Tanks and on Dota 2. The three models trained on World of Tanks chat score 0.94 to 0.95 in that game and drop to 0.76 to 0.83 in Dota 2, while two generic toxicity models score 0.80 to 0.83 in World of Tanks and 0.79 to 0.81 in Dota 2.">
+</picture>
 
 > **Content warning:** the data contain insults and hate speech. Offensive words in examples are
 > masked, and messages labelled hate, threats or extremism are not quoted.
@@ -171,6 +177,7 @@ the table shows the average of the per-run bounds.
    `transformers`, `evaluate`. Finished runs are skipped, so the pipeline can be stopped and resumed.
 
 Each run stores its configuration, environment, training history and predictions in `runs/<name>/`.
+`python scripts/11_readme_figure.py` redraws the figure at the top of this page from the saved results.
 The full report is [`results/REPORT.md`](results/REPORT.md).
 Hardware: NVIDIA RTX 5060 Laptop GPU (8 GB), bf16 mixed precision; 19–32 minutes per XLM-R run.
 

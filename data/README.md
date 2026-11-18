@@ -17,6 +17,8 @@ redistributed.
 Expected files (anywhere under `data/raw/gametox/`, subfolders are fine):
 `train_index_text.csv`, `train_index_label.csv`, `val_index_text.csv`,
 `val_index_label.csv`, `test_index_text.csv`, `test_index_label.csv`.
+All six, including the test labels, come from the organisers' download links
+in the shared-task repository (accessed November 2026).
 
 Naseem, U., Shiwakoti, S., Shah, S. B., Thapa, S., & Zhang, Q. (2025). GameTox: A
 Comprehensive Dataset and Analysis for Enhanced Toxicity Detection in Online Gaming
