@@ -17,7 +17,13 @@ SEED_STEMS = ["fuck", "fck", "fuk", "shit", "bitch", "b1tch", "cunt", "nigg", "n
               "jew", "gay", "autist", "cancer", "kys", "stfu",
               # Polish, Russian (transliterated), German, Spanish
               "dupa", "dupe", "cwel", "chuj", "kurw", "pierd", "jeb", "pizd", "eban", "nahui", "cyka",
-              "hurensohn", "fotze", "wichser", "arsch", "schlampe", "puta", "mierda", "pendej", "cabron"]
+              "hurensohn", "fotze", "wichser", "arsch", "schlampe", "puta", "mierda", "pendej", "cabron",
+              # Hungarian, Czech, more German
+              "kurv", "picsa", "geci", "fick", "vögel", "spast", "missgeburt",
+              # Cyrillic (Russian, Ukrainian, Bulgarian...): the same words in their own script
+              "пидор", "пидар", "педик", "пизд", "хуй", "хуе", "хуё", "хуя", "хуи", "ебан", "ебал",
+              "ебат", "ебав", "ебл", "ёб", "бля", "сука", "суки", "мудак", "мудил", "гандон",
+              "шлюх", "уеб", "долбо", "жид", "хохл", "чурк"]
 _LEET = str.maketrans({"0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a", "$": "s"})
 _WORD = re.compile(r"[\w@$]+", re.UNICODE)
 

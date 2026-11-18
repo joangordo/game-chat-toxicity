@@ -7,7 +7,8 @@ sdk: gradio
 sdk_version: {sdk_version}
 app_file: app.py
 pinned: false
-license: mit
+license: other
+license_name: research-only
 models:
   - {model_repo}
 ---
@@ -19,4 +20,4 @@ Interactive demo of the model trained in
 XLM-RoBERTa base fine-tuned on World of Tanks chat (GameTox) to classify messages into six
 toxicity classes, with calibrated probabilities and a two-threshold moderation policy.
 
-Research demo only. See the repository for the evaluation, its uncertainty and its limitations.
+Research demo only: the model and its training data are for research use. See the repository for the evaluation, its uncertainty and its limitations.

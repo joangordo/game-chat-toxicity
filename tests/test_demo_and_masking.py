@@ -57,3 +57,12 @@ def test_demo_classify_with_tiny_model(tmp_path, monkeypatch):
     probs, summary = app.classify("gg wp")
     assert len(probs) == 6 and abs(sum(probs.values()) - 1) < 1e-5 and "P(toxic)" in summary
     assert app.classify("  ") == ({}, "Write a chat message above.")
+
+
+def test_mask_cyrillic_and_central_european():
+    # The stems used to be Latin-only, so Cyrillic slurs went through unmasked.
+    assert mask("СТ ПИДОРЫ", set()) == "СТ П*****"
+    assert mask("рот ебав", set()) == "рот е***"
+    assert mask("mozogjál a kurva anyádba", set()) == "mozogjál a k**** anyádba"
+    assert "gevögelt" not in mask("das hrin aus dme arsch gevögelt", set())
+    assert mask("трое на базу у них", set()) == "трое на базу у них"   # ordinary chat stays

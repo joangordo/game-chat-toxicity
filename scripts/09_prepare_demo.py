@@ -32,6 +32,9 @@ language: multilingual
 library_name: transformers
 pipeline_tag: text-classification
 base_model: FacebookAI/xlm-roberta-base
+license: other
+license_name: research-only
+license_link: https://github.com/joangordo/game-chat-toxicity/blob/main/data/README.md
 tags: [toxicity, content-moderation, gaming]
 ---
 
@@ -39,6 +42,9 @@ tags: [toxicity, content-moderation, gaming]
 
 Fine-tuned on GameTox (World of Tanks chat) for six classes: {labels}.
 Training code, evaluation and limitations: https://github.com/joangordo/game-chat-toxicity
+
+**Research use only.** GameTox is released by its authors for research purposes only, so this
+model is too. Not for commercial use.
 
 | Metric (this checkpoint) | Value |
 |---|---:|
@@ -54,7 +60,8 @@ and the moderation thresholds chosen on validation.
 (transfer to Dota 2 drops AUROC from ~0.95 to ~0.83). Not suitable for automatic moderation
 decisions without human review.
 
-**Data.** GameTox: Naseem et al., NAACL 2025. Use subject to the dataset's terms.
+**Data.** GameTox: Naseem et al., NAACL 2025 (research use only). The base model,
+XLM-RoBERTa base, is released under the MIT licence.
 """
 
 

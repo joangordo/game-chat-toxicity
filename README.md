@@ -1,5 +1,7 @@
 # Toxicity detection in game chat
 
+[![tests](https://github.com/joangordo/game-chat-toxicity/actions/workflows/tests.yml/badge.svg)](https://github.com/joangordo/game-chat-toxicity/actions/workflows/tests.yml)
+
 **Does a general-purpose toxicity model work on game chat? Does a model trained on one
 game work on another? And what can a public benchmark actually tell us?**
 
@@ -12,26 +14,27 @@ without retraining, to Dota 2 chat ([CONDA](data/README.md)).
 
 **Fine-tuned model on Hugging Face:** [joangordo/game-chat-toxicity-xlmr](https://huggingface.co/joangordo/game-chat-toxicity-xlmr)
 
-> **Content warning:** the data contain insults and hate speech. Examples are masked.
+> **Content warning:** the data contain insults and hate speech. Offensive words in examples are
+> masked, and messages labelled hate, threats or extremism are not quoted.
 
 ## Key findings
 
 1. **General-purpose toxicity models fail on game chat.** On toxic vs non-toxic, off-the-shelf
-   models reach an AUROC of 0.80–0.84; every model trained on game chat reaches 0.93–0.95,
+   models reach an AUROC of 0.80–0.83; every model trained on game chat reaches 0.93–0.95,
    including a TF-IDF baseline.
 2. **The benchmark cannot rank the models by macro-F1.** Two of the six classes (Threats,
    Extremism) have only **11 test messages** between them, so a third of the metric depends
-   on 11 predictions. The test-set bootstrap SD (0.03–0.05) is larger than the gaps between
+   on 11 predictions. The test-set bootstrap SD (0.03–0.05) is as large as most gaps between
    models, and no model is significantly better than TF-IDF in paired tests.
-3. **Selecting on a noisy validation set inflates scores.** Neural models score 0.59–0.62
+3. **Selecting on a noisy validation set inflates scores.** Most neural models score 0.59–0.62
    macro-F1 on validation and 0.43–0.49 on test: picking the best epoch and run on a
    validation set with 3 Extremism messages rewards noise.
 4. **Where the data allow a comparison, XLM-R is best:** highest F1 on the four frequent
-   classes, highest binary AUROC, and a much smaller gap in Russian and German than the
-   character-level models.
+   classes, highest binary AUROC, and a much smaller drop in German than the character-level
+   models (Russian stays hard for all of them).
 5. **Game-specific training barely transfers to another game.** On Dota 2, XLM-R drops from
    0.95 to 0.83 AUROC, while a generic model that never saw game chat reaches 0.81. No model
-   detects implicit toxicity (recall ≤ 13% vs 70–86% for explicit toxicity).
+   detects implicit toxicity (recall ≤ 14% vs 69–86% for explicit toxicity).
 6. **Not deployable for automatic moderation.** Reaching ~90% recall requires sending a quarter
    of all chat to human review; a 95%-precision automatic band catches almost nothing.
 
@@ -131,7 +134,8 @@ is a triage tool for human moderators, not an automatic moderator.
 ## Cross-game transfer: World of Tanks → Dota 2
 
 35,895 labelled Dota 2 messages from 1,917 matches (19.5% toxic). No Dota 2 label is used for
-training or thresholds. CIs resample whole matches.
+training or thresholds. Values are means over 3 seeds; each run's CI resamples whole matches, and
+the table shows the average of the per-run bounds.
 
 | Model | AUROC on GameTox (WoT) | AUROC on CONDA (Dota 2) [95% CI] | Recall, explicit | Recall, implicit |
 |---|---:|---|---:|---:|
@@ -143,8 +147,8 @@ training or thresholds. CIs resample whole matches.
 
 - Training on World of Tanks chat buys 0.15 AUROC in that game but only about 0.02 over a generic
   model in Dota 2. TF-IDF, which memorises game-specific vocabulary, transfers worst.
-- The decision threshold transfers well (F1 with the GameTox threshold is within 0.01 of the best
-  possible threshold on CONDA): the loss is in ranking, not calibration.
+- The decision threshold transfers well (F1 with the GameTox threshold is within 0.02 of the best
+  possible threshold on CONDA for every run): the loss is in ranking, not calibration.
 - Implicit toxicity (sarcasm, indirect insults) is essentially undetected by every model.
 
 ## Limitations
@@ -155,6 +159,8 @@ training or thresholds. CIs resample whole matches.
   careful evaluation, not the leaderboard.
 - The second iteration was motivated by results that included the test set (disclosed above).
 - Language detection on short chat is noisy; CONDA labels are mapped to binary.
+- Two XLM-R runs, including the selected one, were still improving at their last epoch (6 of 6
+  for focal loss, seed 13), so a longer schedule might help.
 - An mDeBERTa configuration is included in `configs/` but was not part of the reported runs.
 
 ## How to run
@@ -166,11 +172,13 @@ training or thresholds. CIs resample whole matches.
 
 Each run stores its configuration, environment, training history and predictions in `runs/<name>/`.
 The full report is [`results/REPORT.md`](results/REPORT.md).
-Hardware: NVIDIA RTX 5060 Laptop GPU (8 GB), bf16 mixed precision; about 25 minutes per XLM-R run.
+Hardware: NVIDIA RTX 5060 Laptop GPU (8 GB), bf16 mixed precision; 19–32 minutes per XLM-R run.
 
 ### Use the published model
 
-The best XLM-R run is on Hugging Face, so it can be used without retraining:
+The selected XLM-R run (focal loss, seed 13) was retrained with its weights saved and published
+on Hugging Face; it reproduces the evaluated run (validation macro-F1 0.633, test 0.455, binary
+AUROC 0.950). It is for research use only, like the data it was trained on:
 
 ```python
 from transformers import pipeline

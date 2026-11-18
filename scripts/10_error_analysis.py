@@ -3,7 +3,10 @@
 
 Quantitative: confusion matrix and error rates by train overlap, language,
 message length and label conflicts. Qualitative: sampled examples of each
-error type, with offensive words masked.
+error type, with offensive words masked. Messages labelled Hate & Harassment,
+Threats or Extremism are never quoted, because they can be hateful without a
+single maskable word; and only a few examples are shown, because GameTox is
+released for research use only.
 
 Outputs
   results/error_analysis.md            masked, safe to publish after review
@@ -32,6 +35,7 @@ from src.masking import load_lexicon, mask
 from src.metrics import confusion
 
 SHORT = {0: "Non-toxic", 1: "Insult", 2: "Offensive", 3: "Hate", 4: "Threat", 5: "Extremism"}
+NOT_QUOTED = {3, 4, 5}   # true labels whose text is never shown
 
 
 def default_run() -> str:
@@ -57,15 +61,18 @@ def examples_table(df: pd.DataFrame, lex: set, n: int, seed: int, sort_by: str |
         df.sample(min(n, len(df)), random_state=seed)
     rows = ["| Message (masked) | True | Predicted | Confidence | Lang |", "|---|---|---|---:|---|"]
     for _, r in sample.iterrows():
-        msg = mask(r["text"], lex).replace("|", "/").replace("\n", " ")[:90]
-        rows.append(f"| `{msg}` | {SHORT[r['label']]} | {SHORT[r['pred']]} | {r['confidence']:.2f} | {r['lang']} |")
+        if r["label"] in NOT_QUOTED:
+            msg = "_(not quoted)_"
+        else:
+            msg = "`" + mask(r["text"], lex).replace("|", "/").replace("\n", " ").replace("`", "'")[:90] + "`"
+        rows.append(f"| {msg} | {SHORT[r['label']]} | {SHORT[r['pred']]} | {r['confidence']:.2f} | {r['lang']} |")
     return "\n".join(rows)
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", default=None)
-    ap.add_argument("--n", type=int, default=8, help="Examples per category")
+    ap.add_argument("--n", type=int, default=3, help="Examples per category")
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
     run_name = args.run or default_run()
@@ -125,7 +132,8 @@ def main() -> None:
     tables = {by: error_rate_table(df, by) for by in ["seen_in_train", "lang_group", "length", "conflicting_in_train"]}
     lines = [f"# Error analysis: `{run_name}` (test set)", "",
              f"{df['wrong'].sum():,} errors out of {len(df):,} messages ({df['wrong'].mean():.1%}). "
-             "Offensive words are masked automatically; review before publishing.", "",
+             "Offensive words are masked automatically and messages labelled Hate, Threat or Extremism "
+             "are not quoted; review before publishing.", "",
              "## Confusion matrix", "", conf_df.to_markdown(), "",
              "![Confusion](figures/10_confusion.png)", "",
              "## Where the errors are", ""]
